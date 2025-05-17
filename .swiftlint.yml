@@ -1,0 +1,14 @@
+trailing_whitespace:
+  severity: warning
+switch_case_alignment: 
+  severity: warning
+  indented_cases: true
+line_length:
+  ignores_comments: true
+  ignores_urls: true
+  warning: 140
+  error: 140
+excluded:
+  - .build
+  - .git
+  - .swiftpm
