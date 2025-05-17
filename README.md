@@ -62,3 +62,7 @@ detector.reset()
 - `KeyCode`: Enumeration of commonly known supported key codes
 - `KeyboardCharacters`: Mapping of key codes to characters
 - `TISInputSourceExtensions`: Extensions for working with keyboard hardware
+
+## Documentation
+
+[View documentation](https://akazm.github.io/shortcut-detection-kit/documentation/shortcutdetectionkit/)
