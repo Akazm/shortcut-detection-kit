@@ -12,6 +12,10 @@ public extension CGEventFlags {
             .init(rawValue: 0x100), .init(rawValue: 0x1), .init(rawValue: 0x2000)
         ]
     }
+    
+    static var maskShiftLeftRight: CGEventFlags {
+        [.init(rawValue: 2), .init(rawValue: 4)]
+    }
 
     /// Explicit representation for empty event flags sometimes to be found within event flags emitted by macOS.
     ///

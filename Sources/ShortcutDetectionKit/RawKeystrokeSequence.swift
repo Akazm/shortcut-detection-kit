@@ -40,6 +40,6 @@ public struct RawKeystrokeSequence: Hashable, Codable, Sendable {
 
     /// The set of modifier flags to ignore when processing events.
     public static var ignoredFlags: CGEventFlags {
-        [.maskOverhead, .maskNonCoalesced, .maskNumericPad, .maskSecondaryFn]
+        [.maskOverhead, .maskNonCoalesced, .maskNumericPad, .maskSecondaryFn, .maskShiftLeftRight]
     }
 }
