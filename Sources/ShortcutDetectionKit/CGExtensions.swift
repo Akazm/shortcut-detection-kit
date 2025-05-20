@@ -36,4 +36,9 @@ public extension CGEvent {
             getIntegerValueField(.keyboardEventKeycode)
         )
     }
+    
+    /// Whether the user holds the key with the associated `keyCode`
+    var isKeyRepeat: Bool {
+        getIntegerValueField(.keyboardEventAutorepeat) != 0
+    }
 }
