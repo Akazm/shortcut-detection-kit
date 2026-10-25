@@ -20,7 +20,7 @@ public final class KeyboardCharacters {
             return "⇪"
         case 58, 61:
             return "⌥"
-        case 59:
+        case 59, 62:
             return "⌃"
         case 48:
             return "⇥"

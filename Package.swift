@@ -14,6 +14,10 @@ let package = Package(
     targets: [
         .target(
             name: "ShortcutDetectionKit"
+        ),
+        .testTarget(
+            name: "ShortcutDetectionKitTests",
+            dependencies: ["ShortcutDetectionKit"]
         )
     ]
 )

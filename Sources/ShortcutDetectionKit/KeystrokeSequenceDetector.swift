@@ -22,30 +22,36 @@ public final actor KeystrokeSequenceDetector {
     /// Creates a new keystroke sequence detector.
     /// - Parameters:
     ///   - interval: The time interval in seconds after which the detector will automatically reset if no new keystrokes are detected. Default is 0.125 seconds.
+    ///   - modifierKeyInterpretation: Whether modifier keys may also be tapped like any other key. Default is ``ModifierKeyInterpretation/modifier``.
     ///   - shouldLogKeycodes: Whether to include keycodes in logs. Default is false for privacy.
     public init(
         autoresetInterval interval: TimeInterval = KeystrokeSequenceDetector.defaultAutoResetInterval,
+        modifierKeyInterpretation: ModifierKeyInterpretation = .modifier,
         shouldLogKeycodes logKeycodes: Bool = false,
         enableLogging loggingEnabled: Bool = false
     ) {
         autoresetInterval = interval
+        keystrokeSequenceState.modifierKeyInterpretation = modifierKeyInterpretation
         shouldLogKeycodes = logKeycodes
         enableLogging = loggingEnabled
     }
-    
+
     /// Creates a new keystroke sequence detector.
     /// - Parameters:
     ///   - interval: The time interval in seconds after which the detector will automatically reset if no new keystrokes are detected. Default is 0.125 seconds.
     ///   - anticipatedInput: A sequence of keystroke sequences to detect
+    ///   - modifierKeyInterpretation: Whether modifier keys may also be tapped like any other key. Default is ``ModifierKeyInterpretation/modifier``.
     ///   - shouldLogKeycodes: Whether to include keycodes in logs. Default is false for privacy.
     public init<S: Sequence>(
         autoresetInterval interval: TimeInterval = KeystrokeSequenceDetector.defaultAutoResetInterval,
         anticipatingInput anticipatedInput: S,
+        modifierKeyInterpretation: ModifierKeyInterpretation = .modifier,
         shouldLogKeycodes logKeycodes: Bool = false,
         enableLogging loggingEnabled: Bool = false
     ) where S.Element == KeystrokeSequence {
         autoresetInterval = interval
         keystrokeSequenceState.anticipatedInput = Set(anticipatedInput)
+        keystrokeSequenceState.modifierKeyInterpretation = modifierKeyInterpretation
         shouldLogKeycodes = logKeycodes
         enableLogging = loggingEnabled
     }
@@ -119,5 +125,17 @@ public final actor KeystrokeSequenceDetector {
         if enableLogging {
             os_log("Updated anticipated input sequences", log: Self.log, type: .debug)
         }
+    }
+
+    /// Returns how the detector interprets modifier keys.
+    /// - Returns: The current ``ModifierKeyInterpretation``
+    public func getModifierKeyInterpretation() -> ModifierKeyInterpretation {
+        keystrokeSequenceState.modifierKeyInterpretation
+    }
+
+    /// Sets how the detector interprets modifier keys, e.g. whether a double tap on ⌃ is a keystroke sequence of its own.
+    /// - Parameter value: The ``ModifierKeyInterpretation`` to use from now on
+    public func setModifierKeyInterpretation(_ value: ModifierKeyInterpretation) {
+        keystrokeSequenceState.modifierKeyInterpretation = value
     }
 }
